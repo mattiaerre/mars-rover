@@ -14,9 +14,9 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     public void Given_A_Rover()
     {
       var position = new PositionModel { Coordinates = new CoordinatesModel { X = 0, Y = 0 }, Orientation = Orientation.N };
-      var maxCoordinates = new CoordinatesModel { X = 100, Y = 100 };
+      var _maxCoordinates = new CoordinatesModel { X = 100, Y = 100 };
 
-      _rover = new Rover(position, maxCoordinates);
+      _rover = new Rover(position, _maxCoordinates);
     }
 
     [Test]
@@ -50,6 +50,16 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     }
 
     [Test]
+    public void Orientatio_Fom_N_To_W_When_Command_RRW()
+    {
+      _rover.Commands(new List<Command> { Command.R, Command.R, Command.R });
+
+      var position = _rover.GetPosition();
+
+      Assert.AreEqual(Orientation.W, position.Orientation);
+    }
+
+    [Test]
     public void Orientatio_Fom_N_To_S_When_Command_LL()
     {
       _rover.Commands(new List<Command> { Command.L, Command.L });
@@ -73,6 +83,26 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     public void Orientatio_Fom_N_To_N_When_Command_RRRR()
     {
       _rover.Commands(new List<Command> { Command.R, Command.R, Command.R, Command.R });
+
+      var position = _rover.GetPosition();
+
+      Assert.AreEqual(Orientation.N, position.Orientation);
+    }
+
+    [Test]
+    public void Orientatio_Fom_S_To_W_When_Command_R()
+    {
+      _rover.Commands(new List<Command> { Command.R });
+
+      var position = _rover.GetPosition();
+
+      Assert.AreEqual(Orientation.W, position.Orientation);
+    }
+
+    [Test]
+    public void Orientatio_Fom_W_To_N_When_Command_R()
+    {
+      _rover.Commands(new List<Command> { Command.R });
 
       var position = _rover.GetPosition();
 

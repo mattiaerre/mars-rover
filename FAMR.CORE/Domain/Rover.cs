@@ -77,6 +77,8 @@ namespace FAMR.CORE.Domain
 
     private bool CanMoveTo(CoordinatesModel coordinates)
     {
+      if (_obstacles == null)
+        return true;
       foreach (var obstacle in _obstacles)
       {
         if (coordinates.X == obstacle.X && coordinates.Y == obstacle.Y)
