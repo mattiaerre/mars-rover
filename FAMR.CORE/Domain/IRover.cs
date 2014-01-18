@@ -5,7 +5,7 @@ namespace FAMR.CORE.Domain
 {
   public interface IRover
   {
-    void Commands(List<Command> commands);
+    void Move(List<Command> commands);
     PositionModel GetPosition();
     bool ObstacleFound { get; }
   }

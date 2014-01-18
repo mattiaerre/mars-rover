@@ -22,7 +22,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Coordinates_Fom_00_To_01_When_Command_F()
     {
-      _rover.Commands(new List<Command> { Command.F });
+      _rover.Move(new List<Command> { Command.F });
 
       var position = _rover.GetPosition();
 
@@ -33,7 +33,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Coordinates_Fom_00_To_10_When_Command_RF()
     {
-      _rover.Commands(new List<Command> { Command.R, Command.F });
+      _rover.Move(new List<Command> { Command.R, Command.F });
 
       var position = _rover.GetPosition();
 
@@ -44,7 +44,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Coordinates_Fom_00_To_1000_When_Command_LF()
     {
-      _rover.Commands(new List<Command> { Command.L, Command.F });
+      _rover.Move(new List<Command> { Command.L, Command.F });
 
       var position = _rover.GetPosition();
 
@@ -55,7 +55,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Coordinates_Fom_00_To_0100_When_Command_RRF()
     {
-      _rover.Commands(new List<Command> { Command.R, Command.R, Command.F });
+      _rover.Move(new List<Command> { Command.R, Command.R, Command.F });
 
       var position = _rover.GetPosition();
 
@@ -66,7 +66,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Coordinates_Fom_00_To_0100_When_Command_B()
     {
-      _rover.Commands(new List<Command> { Command.B });
+      _rover.Move(new List<Command> { Command.B });
 
       var position = _rover.GetPosition();
 
@@ -77,7 +77,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Coordinates_Fom_00_To_11_When_Command_FRF()
     {
-      _rover.Commands(new List<Command> { Command.F, Command.R, Command.F });
+      _rover.Move(new List<Command> { Command.F, Command.R, Command.F });
 
       var position = _rover.GetPosition();
 
@@ -88,7 +88,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Coordinates_Fom_00_To_11_When_Command_RFLF()
     {
-      _rover.Commands(new List<Command> { Command.R, Command.F, Command.L, Command.F });
+      _rover.Move(new List<Command> { Command.R, Command.F, Command.L, Command.F });
 
       var position = _rover.GetPosition();
 
@@ -99,7 +99,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Coordinates_Fom_00_To_00_When_Command_FRFRFRF()
     {
-      _rover.Commands(new List<Command> { Command.F, Command.R, Command.F, Command.R, Command.F, Command.R, Command.F });
+      _rover.Move(new List<Command> { Command.F, Command.R, Command.F, Command.R, Command.F, Command.R, Command.F });
 
       var position = _rover.GetPosition();
 
@@ -110,7 +110,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Coordinates_Fom_00_To_00_When_Command_RFLFLFLF()
     {
-      _rover.Commands(new List<Command> { Command.R, Command.F, Command.L, Command.F, Command.L, Command.F, Command.L, Command.F });
+      _rover.Move(new List<Command> { Command.R, Command.F, Command.L, Command.F, Command.L, Command.F, Command.L, Command.F });
 
       var position = _rover.GetPosition();
 

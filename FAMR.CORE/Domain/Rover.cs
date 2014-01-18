@@ -22,7 +22,7 @@ namespace FAMR.CORE.Domain
       ObstacleFound = false;
     }
 
-    public void Commands(List<Command> commands)
+    public void Move(List<Command> commands)
     {
       foreach (var command in commands)
         if (!ObstacleFound)
@@ -33,8 +33,10 @@ namespace FAMR.CORE.Domain
 
     private void UpdatePosition(Command command)
     {
-      UpdateCoordinates(command);
-      UpdateOrientation(command);
+      if (command == Command.F || command == Command.B)
+        UpdateCoordinates(command);
+      if (command == Command.R || command == Command.L)
+        UpdateOrientation(command);
     }
 
     private void UpdateCoordinates(Command command)
@@ -61,15 +63,7 @@ namespace FAMR.CORE.Domain
       else if (_position.Orientation == Orientation.W && command == Command.B)
         coordinates.X = coordinates.X + 1;
 
-      if (coordinates.X == -1)
-        coordinates.X = _maxCoordinates.X;
-      if (coordinates.Y == -1)
-        coordinates.Y = _maxCoordinates.Y;
-
-      if (coordinates.X == _maxCoordinates.X + 1)
-        coordinates.X = 0;
-      if (coordinates.Y == _maxCoordinates.Y + 1)
-        coordinates.Y = 0;
+      ManageWrapping(coordinates);
 
       if (CanMoveTo(coordinates))
       {
@@ -82,15 +76,26 @@ namespace FAMR.CORE.Domain
       }
     }
 
+    private void ManageWrapping(CoordinatesModel coordinates)
+    {
+      if (coordinates.X == -1)
+        coordinates.X = _maxCoordinates.X;
+      if (coordinates.Y == -1)
+        coordinates.Y = _maxCoordinates.Y;
+
+      if (coordinates.X == _maxCoordinates.X + 1)
+        coordinates.X = 0;
+      if (coordinates.Y == _maxCoordinates.Y + 1)
+        coordinates.Y = 0;
+    }
+
     private bool CanMoveTo(CoordinatesModel coordinates)
     {
       if (_obstacles == null)
         return true;
       foreach (var obstacle in _obstacles)
-      {
         if (coordinates.X == obstacle.X && coordinates.Y == obstacle.Y)
           return false;
-      }
       return true;
     }
 

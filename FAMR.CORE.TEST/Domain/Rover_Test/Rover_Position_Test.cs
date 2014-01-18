@@ -25,7 +25,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     {
       var commands = new List<Command> { Command.F };
 
-      _rover.Commands(commands);
+      _rover.Move(commands);
 
       var result = _rover.GetPosition();
 
@@ -39,7 +39,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     {
       var commands = new List<Command> { Command.R, Command.F };
 
-      _rover.Commands(commands);
+      _rover.Move(commands);
 
       var result = _rover.GetPosition();
 
@@ -53,7 +53,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     {
       var commands = new List<Command> { Command.B };
 
-      _rover.Commands(commands);
+      _rover.Move(commands);
 
       var result = _rover.GetPosition();
 
@@ -67,7 +67,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     {
       var commands = new List<Command> { Command.R, Command.B };
 
-      _rover.Commands(commands);
+      _rover.Move(commands);
 
       var result = _rover.GetPosition();
 
@@ -81,7 +81,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     {
       var commands = new List<Command> { Command.R, Command.B, Command.L, Command.B };
 
-      _rover.Commands(commands);
+      _rover.Move(commands);
 
       var result = _rover.GetPosition();
 
@@ -95,7 +95,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     {
       var commands = new List<Command> { Command.F, Command.F, Command.R, Command.F, Command.F };
 
-      _rover.Commands(commands);
+      _rover.Move(commands);
 
       var result = _rover.GetPosition();
 
@@ -111,7 +111,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
         new Rover(new PositionModel { Coordinates = new CoordinatesModel { X = 100, Y = 100 }, Orientation = Orientation.N },
           _maxCoordinates);
 
-      rover.Commands(new List<Command> { Command.F, Command.R, Command.F });
+      rover.Move(new List<Command> { Command.F, Command.R, Command.F });
 
       var position = rover.GetPosition();
 
@@ -128,7 +128,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
         new Rover(new PositionModel { Coordinates = new CoordinatesModel { X = 0, Y = 100 }, Orientation = Orientation.N },
           _maxCoordinates);
 
-      rover.Commands(new List<Command> { Command.F });
+      rover.Move(new List<Command> { Command.F });
 
       var position = rover.GetPosition();
 
@@ -145,7 +145,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
         new Rover(new PositionModel { Coordinates = new CoordinatesModel { X = 100, Y = 0 }, Orientation = Orientation.E },
           _maxCoordinates);
 
-      rover.Commands(new List<Command> { Command.F });
+      rover.Move(new List<Command> { Command.F });
 
       var position = rover.GetPosition();
 

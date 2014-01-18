@@ -23,7 +23,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Orientatio_Fom_N_To_E_When_Command_R()
     {
-      _rover.Commands(new List<Command> { Command.R });
+      _rover.Move(new List<Command> { Command.R });
 
       var position = _rover.GetPosition();
 
@@ -33,7 +33,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Orientatio_Fom_N_To_S_When_Command_RR()
     {
-      _rover.Commands(new List<Command> { Command.R, Command.R });
+      _rover.Move(new List<Command> { Command.R, Command.R });
 
       var position = _rover.GetPosition();
 
@@ -43,7 +43,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Orientatio_Fom_N_To_W_When_Command_RRR()
     {
-      _rover.Commands(new List<Command> { Command.R, Command.R, Command.R });
+      _rover.Move(new List<Command> { Command.R, Command.R, Command.R });
 
       var position = _rover.GetPosition();
 
@@ -53,7 +53,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Orientatio_Fom_N_To_N_When_Command_RRRR()
     {
-      _rover.Commands(new List<Command> { Command.R, Command.R, Command.R, Command.R });
+      _rover.Move(new List<Command> { Command.R, Command.R, Command.R, Command.R });
 
       var position = _rover.GetPosition();
 
@@ -63,7 +63,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Orientatio_Fom_N_To_W_When_Command_L()
     {
-      _rover.Commands(new List<Command> { Command.L });
+      _rover.Move(new List<Command> { Command.L });
 
       var position = _rover.GetPosition();
 
@@ -73,7 +73,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Orientatio_Fom_N_To_S_When_Command_LL()
     {
-      _rover.Commands(new List<Command> { Command.L, Command.L });
+      _rover.Move(new List<Command> { Command.L, Command.L });
 
       var position = _rover.GetPosition();
 
@@ -83,7 +83,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Orientatio_Fom_N_To_E_When_Command_LLL()
     {
-      _rover.Commands(new List<Command> { Command.L, Command.L, Command.L });
+      _rover.Move(new List<Command> { Command.L, Command.L, Command.L });
 
       var position = _rover.GetPosition();
 
@@ -93,7 +93,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     [Test]
     public void Orientatio_Fom_N_To_N_When_Command_LLLL()
     {
-      _rover.Commands(new List<Command> { Command.L, Command.L, Command.L, Command.L });
+      _rover.Move(new List<Command> { Command.L, Command.L, Command.L, Command.L });
 
       var position = _rover.GetPosition();
 

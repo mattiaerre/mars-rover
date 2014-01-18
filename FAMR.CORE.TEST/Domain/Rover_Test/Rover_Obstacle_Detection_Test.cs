@@ -26,7 +26,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     {
       var commands = new List<Command> { Command.F, Command.R, Command.F };
 
-      _rover.Commands(commands);
+      _rover.Move(commands);
 
       var result = _rover.GetPosition();
 
@@ -47,7 +47,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
 
       var commands = new List<Command> { Command.F, Command.R, Command.F };
 
-      rover.Commands(commands);
+      rover.Move(commands);
 
       var result = rover.GetPosition();
 
@@ -68,7 +68,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
         new CoordinatesModel { X = 3, Y = 3 },
         obstacles);
 
-      rover.Commands(new List<Command>{ Command.F, Command.F, Command.R, Command.F });
+      rover.Move(new List<Command>{ Command.F, Command.F, Command.R, Command.F });
 
       var position = rover.GetPosition();
 
