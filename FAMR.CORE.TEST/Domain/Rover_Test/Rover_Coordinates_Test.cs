@@ -42,6 +42,39 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     }
 
     [Test]
+    public void Coordinates_Fom_00_To_1000_When_Command_LF()
+    {
+      _rover.Commands(new List<Command> { Command.L, Command.F });
+
+      var position = _rover.GetPosition();
+
+      Assert.AreEqual(100, position.Coordinates.X);
+      Assert.AreEqual(0, position.Coordinates.Y);
+    }
+
+    [Test]
+    public void Coordinates_Fom_00_To_0100_When_Command_RRF()
+    {
+      _rover.Commands(new List<Command> { Command.R, Command.R, Command.F });
+
+      var position = _rover.GetPosition();
+
+      Assert.AreEqual(0, position.Coordinates.X);
+      Assert.AreEqual(100, position.Coordinates.Y);
+    }
+
+    [Test]
+    public void Coordinates_Fom_00_To_0100_When_Command_B()
+    {
+      _rover.Commands(new List<Command> { Command.B });
+
+      var position = _rover.GetPosition();
+
+      Assert.AreEqual(0, position.Coordinates.X);
+      Assert.AreEqual(100, position.Coordinates.Y);
+    }
+
+    [Test]
     public void Coordinates_Fom_00_To_11_When_Command_FRF()
     {
       _rover.Commands(new List<Command> { Command.F, Command.R, Command.F });

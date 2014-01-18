@@ -9,14 +9,15 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
   public class Rover_Position_Test
   {
     private IRover _rover;
+    private CoordinatesModel _maxCoordinates;
 
     [SetUp]
     public void Given_A_Rover()
     {
       var position = new PositionModel { Coordinates = new CoordinatesModel { X = 0, Y = 0 }, Orientation = Orientation.N };
-      var maxCoordinates = new CoordinatesModel { X = 100, Y = 100 };
+      _maxCoordinates = new CoordinatesModel { X = 100, Y = 100 };
 
-      _rover = new Rover(position, maxCoordinates);
+      _rover = new Rover(position, _maxCoordinates);
     }
 
     [Test]
@@ -101,6 +102,57 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
       Assert.AreEqual(2, result.Coordinates.X);
       Assert.AreEqual(2, result.Coordinates.Y);
       Assert.AreEqual(Orientation.E, result.Orientation);
+    }
+
+    [Test]
+    public void Position_From_100100N_To_00E_When_Command_FRF()
+    {
+      var rover =
+        new Rover(new PositionModel { Coordinates = new CoordinatesModel { X = 100, Y = 100 }, Orientation = Orientation.N },
+          _maxCoordinates);
+
+      rover.Commands(new List<Command> { Command.F, Command.R, Command.F });
+
+      var position = rover.GetPosition();
+
+      Assert.AreEqual(0, position.Coordinates.X);
+      Assert.AreEqual(0, position.Coordinates.Y);
+
+      Assert.AreEqual(Orientation.E, position.Orientation);
+    }
+    
+    [Test]
+    public void Position_Fom_0100N_To_00N_When_Command_F()
+    {
+      var rover =
+        new Rover(new PositionModel { Coordinates = new CoordinatesModel { X = 0, Y = 100 }, Orientation = Orientation.N },
+          _maxCoordinates);
+
+      rover.Commands(new List<Command> { Command.F });
+
+      var position = rover.GetPosition();
+
+      Assert.AreEqual(0, position.Coordinates.X);
+      Assert.AreEqual(0, position.Coordinates.Y);
+
+      Assert.AreEqual(Orientation.N, position.Orientation);
+    }
+
+    [Test]
+    public void Position_Fom_1000E_To_00E_When_Command_F()
+    {
+      var rover =
+        new Rover(new PositionModel { Coordinates = new CoordinatesModel { X = 100, Y = 0 }, Orientation = Orientation.E },
+          _maxCoordinates);
+
+      rover.Commands(new List<Command> { Command.F });
+
+      var position = rover.GetPosition();
+
+      Assert.AreEqual(0, position.Coordinates.X);
+      Assert.AreEqual(0, position.Coordinates.Y);
+
+      Assert.AreEqual(Orientation.E, position.Orientation);
     }
   }
 }

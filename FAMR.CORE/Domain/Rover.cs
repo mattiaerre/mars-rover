@@ -8,7 +8,6 @@ namespace FAMR.CORE.Domain
     private readonly PositionModel _position;
     private readonly CoordinatesModel _maxCoordinates;
     private readonly List<CoordinatesModel> _obstacles;
-    private bool _obstacleFound;
 
     public Rover(PositionModel position, CoordinatesModel maxCoordinates)
       : this(position, maxCoordinates, null)
@@ -20,13 +19,16 @@ namespace FAMR.CORE.Domain
       _position = position;
       _maxCoordinates = maxCoordinates;
       _obstacles = obstacles;
-      _obstacleFound = false;
+      ObstacleFound = false;
     }
 
     public void Commands(List<Command> commands)
     {
       foreach (var command in commands)
-        UpdatePosition(command);
+        if (!ObstacleFound)
+          UpdatePosition(command);
+        else
+          return;
     }
 
     private void UpdatePosition(Command command)
@@ -64,6 +66,11 @@ namespace FAMR.CORE.Domain
       if (coordinates.Y == -1)
         coordinates.Y = _maxCoordinates.Y;
 
+      if (coordinates.X == _maxCoordinates.X + 1)
+        coordinates.X = 0;
+      if (coordinates.Y == _maxCoordinates.Y + 1)
+        coordinates.Y = 0;
+
       if (CanMoveTo(coordinates))
       {
         _position.Coordinates.X = coordinates.X;
@@ -71,7 +78,7 @@ namespace FAMR.CORE.Domain
       }
       else
       {
-        _obstacleFound = true;
+        ObstacleFound = true;
       }
     }
 
@@ -115,9 +122,6 @@ namespace FAMR.CORE.Domain
       return _position;
     }
 
-    public bool ObstacleFound
-    {
-      get { return _obstacleFound; }
-    }
+    public bool ObstacleFound { get; private set; }
   }
 }
