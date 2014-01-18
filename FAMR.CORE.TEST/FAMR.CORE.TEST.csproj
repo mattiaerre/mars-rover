@@ -44,9 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\Rover\Rover_Coordinates_Test.cs" />
-    <Compile Include="Domain\Rover\Rover_Orientation_Test.cs" />
-    <Compile Include="Domain\Rover\Rover_Position_Test.cs" />
+    <Compile Include="Domain\Rover_Test\Rover_Coordinates_Test.cs" />
+    <Compile Include="Domain\Rover_Test\Rover_Obstacle_Detection.cs" />
+    <Compile Include="Domain\Rover_Test\Rover_Orientation_Test.cs" />
+    <Compile Include="Domain\Rover_Test\Rover_Position_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,5 +7,6 @@ namespace FAMR.CORE.Domain
   {
     void Commands(List<Command> commands);
     PositionModel GetPosition();
+    bool ObstacleFound { get; }
   }
 }

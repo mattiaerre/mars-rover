@@ -3,7 +3,7 @@ using FAMR.CORE.Domain;
 using FAMR.CORE.Models;
 using NUnit.Framework;
 
-namespace FAMR.CORE.TEST.Domain.Rover
+namespace FAMR.CORE.TEST.Domain.Rover_Test
 {
   [TestFixture]
   public class Rover_Orientation_Test
@@ -16,7 +16,7 @@ namespace FAMR.CORE.TEST.Domain.Rover
       var position = new PositionModel { Coordinates = new CoordinatesModel { X = 0, Y = 0 }, Orientation = Orientation.N };
       var maxCoordinates = new CoordinatesModel { X = 100, Y = 100 };
 
-      _rover = new CORE.Domain.Rover(position, maxCoordinates);
+      _rover = new Rover(position, maxCoordinates);
     }
 
     [Test]

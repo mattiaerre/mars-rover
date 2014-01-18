@@ -7,11 +7,20 @@ namespace FAMR.CORE.Domain
   {
     private readonly PositionModel _position;
     private readonly CoordinatesModel _maxCoordinates;
+    private readonly List<CoordinatesModel> _obstacles;
+    private bool _obstacleFound;
 
     public Rover(PositionModel position, CoordinatesModel maxCoordinates)
+      : this(position, maxCoordinates, null)
+    {
+    }
+
+    public Rover(PositionModel position, CoordinatesModel maxCoordinates, List<CoordinatesModel> obstacles)
     {
       _position = position;
       _maxCoordinates = maxCoordinates;
+      _obstacles = obstacles;
+      _obstacleFound = false;
     }
 
     public void Commands(List<Command> commands)
@@ -28,30 +37,52 @@ namespace FAMR.CORE.Domain
 
     private void UpdateCoordinates(Command command)
     {
+      var coordinates = new CoordinatesModel { X = _position.Coordinates.X, Y = _position.Coordinates.Y };
+
       if (_position.Orientation == Orientation.N && command == Command.F)
-        _position.Coordinates.Y = _position.Coordinates.Y + 1;
+        coordinates.Y = coordinates.Y + 1;
       else if (_position.Orientation == Orientation.N && command == Command.B)
-        _position.Coordinates.Y = _position.Coordinates.Y - 1;
+        coordinates.Y = coordinates.Y - 1;
 
       else if (_position.Orientation == Orientation.E && command == Command.F)
-        _position.Coordinates.X = _position.Coordinates.X + 1;
+        coordinates.X = coordinates.X + 1;
       else if (_position.Orientation == Orientation.E && command == Command.B)
-        _position.Coordinates.X = _position.Coordinates.X - 1;
+        coordinates.X = coordinates.X - 1;
 
       else if (_position.Orientation == Orientation.S && command == Command.F)
-        _position.Coordinates.Y = _position.Coordinates.Y - 1;
+        coordinates.Y = coordinates.Y - 1;
       else if (_position.Orientation == Orientation.S && command == Command.B)
-        _position.Coordinates.Y = _position.Coordinates.Y + 1;
+        coordinates.Y = coordinates.Y + 1;
 
       else if (_position.Orientation == Orientation.W && command == Command.F)
-        _position.Coordinates.X = _position.Coordinates.X - 1;
+        coordinates.X = coordinates.X - 1;
       else if (_position.Orientation == Orientation.W && command == Command.B)
-        _position.Coordinates.X = _position.Coordinates.X + 1;
+        coordinates.X = coordinates.X + 1;
 
-      if (_position.Coordinates.X == -1)
-        _position.Coordinates.X = _maxCoordinates.X;
-      if (_position.Coordinates.Y == -1)
-        _position.Coordinates.Y = _maxCoordinates.Y;
+      if (coordinates.X == -1)
+        coordinates.X = _maxCoordinates.X;
+      if (coordinates.Y == -1)
+        coordinates.Y = _maxCoordinates.Y;
+
+      if (CanMoveTo(coordinates))
+      {
+        _position.Coordinates.X = coordinates.X;
+        _position.Coordinates.Y = coordinates.Y;
+      }
+      else
+      {
+        _obstacleFound = true;
+      }
+    }
+
+    private bool CanMoveTo(CoordinatesModel coordinates)
+    {
+      foreach (var obstacle in _obstacles)
+      {
+        if (coordinates.X == obstacle.X && coordinates.Y == obstacle.Y)
+          return false;
+      }
+      return true;
     }
 
     private void UpdateOrientation(Command command)
@@ -80,6 +111,11 @@ namespace FAMR.CORE.Domain
     public PositionModel GetPosition()
     {
       return _position;
+    }
+
+    public bool ObstacleFound
+    {
+      get { return _obstacleFound; }
     }
   }
 }
