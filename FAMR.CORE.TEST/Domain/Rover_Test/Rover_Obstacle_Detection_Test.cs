@@ -78,5 +78,26 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
 
       Assert.IsTrue(rover.ObstacleFound);
     }
+
+    [Test]
+    public void Position_From_20N_To_21N_When_Command_FFRFFF_And_Obstacle_In_22()
+    {
+      var obstacles = new List<CoordinatesModel> { new CoordinatesModel { X = 2, Y = 2 } };
+
+      var rover = new Rover(
+        new PositionModel { Coordinates = new CoordinatesModel { X = 2, Y = 0 }, Orientation = Orientation.N },
+        new CoordinatesModel { X = 3, Y = 3 },
+        obstacles);
+
+      rover.Move(new List<Command> { Command.F, Command.F, Command.R, Command.F, Command.F, Command.F });
+
+      var position = rover.GetPosition();
+
+      Assert.AreEqual(2, position.Coordinates.X);
+      Assert.AreEqual(1, position.Coordinates.Y);
+      Assert.AreEqual(Orientation.N, position.Orientation);
+
+      Assert.IsTrue(rover.ObstacleFound);
+    }
   }
 }

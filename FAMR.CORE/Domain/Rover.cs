@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FAMR.CORE.Models;
 
 namespace FAMR.CORE.Domain
@@ -65,15 +66,13 @@ namespace FAMR.CORE.Domain
 
       ManageWrapping(coordinates);
 
-      if (CanMoveTo(coordinates))
+      if (_obstacles == null || CanMoveTo(coordinates))
       {
         _position.Coordinates.X = coordinates.X;
         _position.Coordinates.Y = coordinates.Y;
       }
       else
-      {
         ObstacleFound = true;
-      }
     }
 
     private void ManageWrapping(CoordinatesModel coordinates)
@@ -91,12 +90,7 @@ namespace FAMR.CORE.Domain
 
     private bool CanMoveTo(CoordinatesModel coordinates)
     {
-      if (_obstacles == null)
-        return true;
-      foreach (var obstacle in _obstacles)
-        if (coordinates.X == obstacle.X && coordinates.Y == obstacle.Y)
-          return false;
-      return true;
+      return !_obstacles.Any(e => e.X == coordinates.X && e.Y == coordinates.Y);
     }
 
     private void UpdateOrientation(Command command)
