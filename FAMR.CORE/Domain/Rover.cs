@@ -20,7 +20,31 @@ namespace FAMR.CORE.Domain
 
     private void UpdatePosition(Command command)
     {
+      UpdateCoordinates(command);
       UpdateOrientation(command);
+    }
+
+    private void UpdateCoordinates(Command command)
+    {
+      if (_position.Orientation == Orientation.N && command == Command.F)
+        _position.Coordinates.Y = _position.Coordinates.Y + 1;
+      else if (_position.Orientation == Orientation.N && command == Command.B)
+        _position.Coordinates.Y = _position.Coordinates.Y - 1;
+
+      else if (_position.Orientation == Orientation.E && command == Command.F)
+        _position.Coordinates.X = _position.Coordinates.X + 1;
+      else if (_position.Orientation == Orientation.E && command == Command.B)
+        _position.Coordinates.X = _position.Coordinates.X - 1;
+
+      else if (_position.Orientation == Orientation.S && command == Command.F)
+        _position.Coordinates.Y = _position.Coordinates.Y - 1;
+      else if (_position.Orientation == Orientation.S && command == Command.B)
+        _position.Coordinates.Y = _position.Coordinates.Y + 1;
+
+      else if (_position.Orientation == Orientation.W && command == Command.F)
+        _position.Coordinates.X = _position.Coordinates.X - 1;
+      else if (_position.Orientation == Orientation.W && command == Command.B)
+        _position.Coordinates.X = _position.Coordinates.X + 1;
     }
 
     private void UpdateOrientation(Command command)

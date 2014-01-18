@@ -78,16 +78,79 @@ namespace FAMR.CORE.TEST
       Assert.AreEqual(Orientation.N, position.Orientation);
     }
 
-    [Test, Explicit]
+    [Test]
+    public void Coordinates_Fom_00_To_01_When_Command_F()
+    {
+      _rover.Commands(new List<Command> { Command.F });
+
+      var position = _rover.GetPosition();
+
+      Assert.AreEqual(0, position.Coordinates.X);
+      Assert.AreEqual(1, position.Coordinates.Y);
+    }
+
+    [Test]
+    public void Coordinates_Fom_00_To_10_When_Command_RF()
+    {
+      _rover.Commands(new List<Command> { Command.R, Command.F });
+
+      var position = _rover.GetPosition();
+
+      Assert.AreEqual(1, position.Coordinates.X);
+      Assert.AreEqual(0, position.Coordinates.Y);
+    }
+
+    [Test]
+    public void Coordinates_Fom_00_To_11_When_Command_FRF()
+    {
+      _rover.Commands(new List<Command> { Command.F, Command.R, Command.F });
+
+      var position = _rover.GetPosition();
+
+      Assert.AreEqual(1, position.Coordinates.X);
+      Assert.AreEqual(1, position.Coordinates.Y);
+    }
+
+    [Test]
+    public void Coordinates_Fom_00_To_11_When_Command_RFLF()
+    {
+      _rover.Commands(new List<Command> { Command.R, Command.F, Command.L, Command.F });
+
+      var position = _rover.GetPosition();
+
+      Assert.AreEqual(1, position.Coordinates.X);
+      Assert.AreEqual(1, position.Coordinates.Y);
+    }
+
+    [Test]
+    public void Coordinates_Fom_00_To_00_When_Command_FRFRFRF()
+    {
+      _rover.Commands(new List<Command> { Command.F, Command.R, Command.F, Command.R, Command.F, Command.R, Command.F });
+
+      var position = _rover.GetPosition();
+
+      Assert.AreEqual(0, position.Coordinates.X);
+      Assert.AreEqual(0, position.Coordinates.Y);
+    }
+
+    [Test]
+    public void Coordinates_Fom_00_To_00_When_Command_RFLFLFLF()
+    {
+      _rover.Commands(new List<Command> { Command.R, Command.F, Command.L, Command.F, Command.L, Command.F, Command.L, Command.F });
+
+      var position = _rover.GetPosition();
+
+      Assert.AreEqual(0, position.Coordinates.X);
+      Assert.AreEqual(0, position.Coordinates.Y);
+    }
+
+    [Test]
     public void Start_00N_Command_F_End_01N()
     {
-      // arrange
       var commands = new List<Command> { Command.F };
 
-      // act
       _rover.Commands(commands);
 
-      // asser
       var result = _rover.GetPosition();
 
       Assert.AreEqual(0, result.Coordinates.X);
@@ -95,16 +158,13 @@ namespace FAMR.CORE.TEST
       Assert.AreEqual(Orientation.N, result.Orientation);
     }
 
-    [Test, Explicit]
-    public void Start_00E_Command_F_End_10E()
+    [Test]
+    public void Start_00N_Command_RF_End_10E()
     {
-      // arrange
-      var commands = new List<Command> { Command.F };
+      var commands = new List<Command> { Command.R, Command.F };
 
-      // act
       _rover.Commands(commands);
 
-      // asser
       var result = _rover.GetPosition();
 
       Assert.AreEqual(1, result.Coordinates.X);
