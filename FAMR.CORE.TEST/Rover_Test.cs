@@ -214,5 +214,19 @@ namespace FAMR.CORE.TEST
       Assert.AreEqual(100, result.Coordinates.Y);
       Assert.AreEqual(Orientation.N, result.Orientation);
     }
+
+    [Test]
+    public void Position_From_00N_To_22E_When_Command_FFRFF()
+    {
+      var commands = new List<Command> { Command.F, Command.F, Command.R, Command.F, Command.F };
+
+      _rover.Commands(commands);
+
+      var result = _rover.GetPosition();
+
+      Assert.AreEqual(2, result.Coordinates.X);
+      Assert.AreEqual(2, result.Coordinates.Y);
+      Assert.AreEqual(Orientation.E, result.Orientation);
+    }
   }
 }
