@@ -20,7 +20,27 @@ namespace FAMR.CORE.Domain
 
     private void UpdatePosition(Command command)
     {
-      _position.Orientation = Orientation.E;
+      UpdateOrientation(command);
+    }
+
+    private void UpdateOrientation(Command command)
+    {
+      if (_position.Orientation == Orientation.N && command == Command.R)
+        _position.Orientation = Orientation.E;
+      else if (_position.Orientation == Orientation.N && command == Command.L)
+        _position.Orientation = Orientation.W;
+      else if (_position.Orientation == Orientation.E && command == Command.R)
+        _position.Orientation = Orientation.S;
+      else if (_position.Orientation == Orientation.E && command == Command.L)
+        _position.Orientation = Orientation.N;
+      else if (_position.Orientation == Orientation.S && command == Command.R)
+        _position.Orientation = Orientation.W;
+      else if (_position.Orientation == Orientation.S && command == Command.L)
+        _position.Orientation = Orientation.E;
+      else if (_position.Orientation == Orientation.W && command == Command.R)
+        _position.Orientation = Orientation.N;
+      else if (_position.Orientation == Orientation.W && command == Command.L)
+        _position.Orientation = Orientation.S;
     }
 
     public PositionModel GetPosition()
