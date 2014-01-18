@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Domain\Command.cs" />
     <Compile Include="Domain\IRover.cs" />
+    <Compile Include="Models\CoordinatesModel.cs" />
     <Compile Include="Models\Orientation.cs" />
     <Compile Include="Models\PositionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

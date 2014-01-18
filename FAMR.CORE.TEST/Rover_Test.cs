@@ -13,7 +13,7 @@ namespace FAMR.CORE.TEST
     [SetUp]
     public void Given_A_Rover()
     {
-      var position = new PositionModel { X = 0, Y = 0, Orientation = Orientation.N };
+      var position = new PositionModel { Coordinates = new CoordinatesModel { X = 0, Y = 0 }, Orientation = Orientation.N };
 
       _rover = new Rover(position);
     }
@@ -90,8 +90,8 @@ namespace FAMR.CORE.TEST
       // asser
       var result = _rover.GetPosition();
 
-      Assert.AreEqual(0, result.X);
-      Assert.AreEqual(1, result.X);
+      Assert.AreEqual(0, result.Coordinates.X);
+      Assert.AreEqual(1, result.Coordinates.Y);
       Assert.AreEqual(Orientation.N, result.Orientation);
     }
 
@@ -107,8 +107,8 @@ namespace FAMR.CORE.TEST
       // asser
       var result = _rover.GetPosition();
 
-      Assert.AreEqual(1, result.X);
-      Assert.AreEqual(0, result.X);
+      Assert.AreEqual(1, result.Coordinates.X);
+      Assert.AreEqual(0, result.Coordinates.Y);
       Assert.AreEqual(Orientation.E, result.Orientation);
     }
   }

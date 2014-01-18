@@ -2,8 +2,7 @@
 {
   public class PositionModel
   {
-    public int X { get; set; }
-    public int Y { get; set; }
+    public CoordinatesModel Coordinates { get; set; }
     public Orientation Orientation { get; set; }
   }
 }
