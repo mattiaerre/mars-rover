@@ -21,7 +21,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     }
 
     [Test]
-    public void Orientatio_Fom_N_To_E_When_Command_R()
+    public void Orientation_Fom_N_To_E_When_Command_R()
     {
       _rover.Move(new List<Command> { Command.R });
 
@@ -31,7 +31,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     }
 
     [Test]
-    public void Orientatio_Fom_N_To_S_When_Command_RR()
+    public void Orientation_Fom_N_To_S_When_Command_RR()
     {
       _rover.Move(new List<Command> { Command.R, Command.R });
 
@@ -41,7 +41,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     }
 
     [Test]
-    public void Orientatio_Fom_N_To_W_When_Command_RRR()
+    public void Orientation_Fom_N_To_W_When_Command_RRR()
     {
       _rover.Move(new List<Command> { Command.R, Command.R, Command.R });
 
@@ -51,7 +51,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     }
 
     [Test]
-    public void Orientatio_Fom_N_To_N_When_Command_RRRR()
+    public void Orientation_Fom_N_To_N_When_Command_RRRR()
     {
       _rover.Move(new List<Command> { Command.R, Command.R, Command.R, Command.R });
 
@@ -61,7 +61,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     }
 
     [Test]
-    public void Orientatio_Fom_N_To_W_When_Command_L()
+    public void Orientation_Fom_N_To_W_When_Command_L()
     {
       _rover.Move(new List<Command> { Command.L });
 
@@ -71,7 +71,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     }
 
     [Test]
-    public void Orientatio_Fom_N_To_S_When_Command_LL()
+    public void Orientation_Fom_N_To_S_When_Command_LL()
     {
       _rover.Move(new List<Command> { Command.L, Command.L });
 
@@ -81,7 +81,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     }
 
     [Test]
-    public void Orientatio_Fom_N_To_E_When_Command_LLL()
+    public void Orientation_Fom_N_To_E_When_Command_LLL()
     {
       _rover.Move(new List<Command> { Command.L, Command.L, Command.L });
 
@@ -91,7 +91,7 @@ namespace FAMR.CORE.TEST.Domain.Rover_Test
     }
 
     [Test]
-    public void Orientatio_Fom_N_To_N_When_Command_LLLL()
+    public void Orientation_Fom_N_To_N_When_Command_LLLL()
     {
       _rover.Move(new List<Command> { Command.L, Command.L, Command.L, Command.L });
 
