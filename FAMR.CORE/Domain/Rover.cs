@@ -9,12 +9,10 @@ namespace FAMR.CORE.Domain
     private readonly PositionModel _position;
     private readonly CoordinatesModel _maxCoordinates;
     private readonly List<CoordinatesModel> _obstacles;
-
     public Rover(PositionModel position, CoordinatesModel maxCoordinates)
       : this(position, maxCoordinates, null)
     {
     }
-
     public Rover(PositionModel position, CoordinatesModel maxCoordinates, List<CoordinatesModel> obstacles)
     {
       _position = position;
@@ -22,7 +20,6 @@ namespace FAMR.CORE.Domain
       _obstacles = obstacles;
       ObstacleFound = false;
     }
-
     public void Move(List<Command> commands)
     {
       foreach (var command in commands)
@@ -31,7 +28,6 @@ namespace FAMR.CORE.Domain
         else
           return;
     }
-
     private void UpdatePosition(Command command)
     {
       if (command == Command.F || command == Command.B)
@@ -39,7 +35,6 @@ namespace FAMR.CORE.Domain
       if (command == Command.R || command == Command.L)
         UpdateOrientation(command);
     }
-
     private void UpdateCoordinates(Command command)
     {
       var coordinates = new CoordinatesModel { X = _position.Coordinates.X, Y = _position.Coordinates.Y };
@@ -74,7 +69,6 @@ namespace FAMR.CORE.Domain
       else
         ObstacleFound = true;
     }
-
     private void ManageWrapping(CoordinatesModel coordinates)
     {
       if (coordinates.X == -1)
@@ -87,12 +81,10 @@ namespace FAMR.CORE.Domain
       if (coordinates.Y == _maxCoordinates.Y + 1)
         coordinates.Y = 0;
     }
-
     private bool CanMoveTo(CoordinatesModel coordinates)
     {
       return !_obstacles.Any(e => e.X == coordinates.X && e.Y == coordinates.Y);
     }
-
     private void UpdateOrientation(Command command)
     {
       if (_position.Orientation == Orientation.N && command == Command.R)
@@ -115,12 +107,10 @@ namespace FAMR.CORE.Domain
       else if (_position.Orientation == Orientation.W && command == Command.L)
         _position.Orientation = Orientation.S;
     }
-
     public PositionModel GetPosition()
     {
       return _position;
     }
-
     public bool ObstacleFound { get; private set; }
   }
 }
