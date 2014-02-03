@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Rover_Test\Git_Test.cs" />
     <Compile Include="Domain\Rover_Test\Rover_Coordinates_Test.cs" />
     <Compile Include="Domain\Rover_Test\Rover_Obstacle_Detection_Test.cs" />
     <Compile Include="Domain\Rover_Test\Rover_Orientation_Test.cs" />
